@@ -14,6 +14,7 @@ import {
   import styles from './Styles'
   import { useEffect } from "react";
   import React from "react";
+  import ViewModel from "./ViewModel";
   
   interface Props extends StackScreenProps<RootStackParamList, 
   'HomeScreen'>{};
@@ -34,6 +35,7 @@ import {
     //     }   
     // },[user])
   
+    const {handledinput, onsubmit, correo, pass} = ViewModel ()
     return (
       <View style={styles.container}>
         <Image
@@ -54,31 +56,31 @@ import {
             image={require("../../../../assets/email.jpg")}
             placeholder="Correo electrónico"
             keyboardType="email-address"
-            value={""}
-            onChangeText={() => {}}
-            property="email"
+            value={correo}
+            onChangeText={handledinput}
+            property="correo"
           />
           <CustomTextInput
             image={require("../../../../assets/password.jpeg")}
             placeholder="Contraseña"
             keyboardType="default"
             secureTextEntry
-            value={""}
-            onChangeText={() => {}}
-            property="password"
+            value={pass}
+            onChangeText={handledinput}
+            property="pass"
           />
           <View style={{ marginTop: 30 }}>
             <RoundedButton
               text="ENTRAR"
-              onPress={() => console.log("")}
+              onPress={onsubmit}
             />
           </View>
           <View style={styles.formRegister}>
-            <Text>¿No tienes cuenta?</Text>
+            <Text>¿Olvidaste tu constraseña?</Text>
             <TouchableOpacity
               onPress={() => navigation.navigate("RegisterScreen")}
             >
-              <Text style={styles.formRegisterText}>Regístrate</Text>
+              <Text style={styles.formRegisterText}>Recuperar</Text>
             </TouchableOpacity>
           </View>
           </ScrollView>
