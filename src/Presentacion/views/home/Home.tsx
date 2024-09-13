@@ -5,6 +5,7 @@ import {
     TouchableOpacity,
     ToastAndroid,
     ScrollView,
+    ImageBackground,
   } from "react-native";
   import RoundedButton from "../../components/RoundedButton";
   import { RootStackParamList } from "../../../../App";
@@ -15,6 +16,7 @@ import {
   import { useEffect } from "react";
   import React from "react";
   import ViewModel from "./ViewModel";
+import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
   
   interface Props extends StackScreenProps<RootStackParamList, 
   'HomeScreen'>{};
@@ -38,10 +40,10 @@ import {
     const {handledinput, onsubmit, correo, pass} = ViewModel ()
     return (
       <View style={styles.container}>
-        <Image
+        <ImageBackground resizeMode="cover"
           source={require("../../../../assets/Logo.jpeg")}
           style={styles.imageBackground}
-        />
+        >
         <View style={styles.logoContainer}>
           <Image
             source={require("../../../../assets/Logo2.png")}
@@ -50,10 +52,9 @@ import {
           <Text style={styles.logoText}>SGRT MOVIL</Text>
         </View>
         <View style={styles.form}>
-          <ScrollView>
           <Text style={styles.formText}>INGRESAR</Text>
           <CustomTextInput
-            image={require("../../../../assets/email.jpg")}
+            image={faUser}
             placeholder="Correo electrónico"
             keyboardType="email-address"
             value={correo}
@@ -61,7 +62,7 @@ import {
             property="correo"
           />
           <CustomTextInput
-            image={require("../../../../assets/password.jpeg")}
+            image={faLock}
             placeholder="Contraseña"
             keyboardType="default"
             secureTextEntry
@@ -75,16 +76,16 @@ import {
               onPress={onsubmit}
             />
           </View>
-          <View style={styles.formRegister}>
+          {/* <View style={styles.formRegister}>
             <Text>¿Olvidaste tu constraseña?</Text>
             <TouchableOpacity
               onPress={() => navigation.navigate("RegisterScreen")}
             >
               <Text style={styles.formRegisterText}>Recuperar</Text>
             </TouchableOpacity>
-          </View>
-          </ScrollView>
+          </View> */}
         </View>
+        </ImageBackground>
       </View>
     );
   };

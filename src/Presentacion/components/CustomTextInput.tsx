@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import React from "react";
 import { View, Image, TextInput, StyleSheet, KeyboardType } from "react-native";
 
@@ -22,7 +23,7 @@ const CustomTextInput = ({
 }: Props) => {
   return (
     <View style={styles.formInput}>
-      <Image style={styles.formIcon} source={image} />
+      <FontAwesomeIcon style={styles.formIcon} icon={image} />
       <TextInput
         style={styles.formTextInput}
         placeholder={placeholder}
@@ -43,12 +44,12 @@ const styles = StyleSheet.create({
   formIcon: {
     width: 25,
     height: 25,
-    marginTop: 5
+    marginTop: 5,
   },
   formTextInput: {
     flex: 1,
     borderBlockColor: '#AAAAAA',
-    borderBottomWidth: 1,
+    borderBottomWidth: 1.5,
     marginLeft: 15
   },
 });
