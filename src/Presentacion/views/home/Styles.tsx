@@ -25,6 +25,7 @@ const HomeStyles = StyleSheet.create({
   formText: {
     fontWeight: "bold",
     fontSize: 16,
+    color: 'white'
   },
 
   logoContainer: {
@@ -42,6 +43,23 @@ const HomeStyles = StyleSheet.create({
     fontSize: 20,
     marginTop: 10,
     fontWeight: "bold",
+  },
+  formInput: {
+    flexDirection: 'row',
+    marginTop: 30,
+    borderBottomColor: 'white',
+    borderBottomWidth: 1.5
+  },
+  formIcon: {
+    width: 25,
+    height: 25,
+    marginTop: 5,
+    color: 'white'
+  },
+  formTextInput: {
+    flex: 1,
+    marginLeft: 15,
+    color: 'white'
   },
 });
 

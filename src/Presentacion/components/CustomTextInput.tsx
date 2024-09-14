@@ -27,6 +27,7 @@ const CustomTextInput = ({
       <TextInput
         style={styles.formTextInput}
         placeholder={placeholder}
+        placeholderTextColor="gray"
         keyboardType={keyboardType}
         value={value}
         onChangeText={(text) => onChangeText(property, text)}
@@ -39,18 +40,20 @@ const CustomTextInput = ({
 const styles = StyleSheet.create({
   formInput: {
     flexDirection: 'row',
-    marginTop: 30
+    marginTop: 30,
+    borderBottomColor: 'white',
+    borderBottomWidth: 1.5
   },
   formIcon: {
     width: 25,
     height: 25,
     marginTop: 5,
+    color: 'white'
   },
   formTextInput: {
     flex: 1,
-    borderBlockColor: '#AAAAAA',
-    borderBottomWidth: 1.5,
-    marginLeft: 15
+    marginLeft: 15,
+    color: 'white'
   },
 });
 
