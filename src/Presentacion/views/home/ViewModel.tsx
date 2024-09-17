@@ -1,25 +1,37 @@
 import React, { useState } from 'react'
 import { login } from '../../../Services/Service'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const ViewModel = () => {
 
-    const [userData, setUserData] = useState ({
-        correo:'',
-        pass:''
+    const [userData, setUserData] = useState({
+        correo: '',
+        pass: ''
     })
 
-    const onsubmit=() =>{
-        if (!userData.correo || !userData.pass) return console.log("Correo y contraseña obligatorios")
-            login(userData).then((Response)=>console.log(Response)) 
-        } 
+    const [response, setResponse] = useState({
+        nodoc: ''
+    })
 
-    const handledinput=(propierties: string, values: string) =>{
-        setUserData({...userData, [propierties]: values});
-    } 
+    const onsubmit = () => {
+        if (!userData.correo || !userData.pass) return console.log("Correo y contraseña obligatorios")
+        login(userData).then((Response) => {
+            AsyncStorage.setItem('user', Response.nodoc)
+            AsyncStorage.setItem('token', Response.token)
+            setResponse(Response)
+            console.log('token: ' + Response.token)
+        })
+
+    }
+
+
+    const handledinput = (propierties: string, values: string) => {
+        setUserData({ ...userData, [propierties]: values });
+    }
 
     return {
-        handledinput, onsubmit, ...userData
-    } 
+        handledinput, onsubmit, ...userData, response
+    }
 
 }
 

@@ -26,6 +26,10 @@ const App = () => {
         <Stack.Screen
           name="ProfileInfoScreen"
           component={ProfileInfoScreen}
+          options={{
+            headerShown: true,
+            title: 'Solicitudes'
+          }} 
         />
       </Stack.Navigator>
     </NavigationContainer>
