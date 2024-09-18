@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { HomeScreen } from './src/Presentacion/views/home/Home';
 
 import { ProfileInfoScreen } from './src/Presentacion/views/profile/info/ProfileInfo';
+import { Button } from 'react-native';
 
 export type RootStackParamList = {
   HomeScreen: undefined;
@@ -26,10 +27,15 @@ const App = () => {
         <Stack.Screen
           name="ProfileInfoScreen"
           component={ProfileInfoScreen}
-          options={{
+          options={({navigation})=>({
             headerShown: true,
-            title: 'Solicitudes'
-          }} 
+            title: 'Solicitudes',
+            headerRight: ()=>(
+              <Button title='Cerrar sesión'   onPress={() => {
+            navigation.navigate("HomeScreen");
+          }}/>
+            )
+          })} 
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -20,6 +20,7 @@ const ViewModel = () => {
             AsyncStorage.setItem('token', Response.token)
             setResponse(Response)
             console.log('token: ' + Response.token)
+            console.log('user: '+ Response.nodoc)
         })
 
     }
