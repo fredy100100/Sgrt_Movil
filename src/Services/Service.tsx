@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { UserDataCreateI, UserDataI } from "../Presentacion/models/Global";
 
-const baseUrl: string = "http://192.168.144.85:8080";
+const baseUrl: string = "http://192.168.56.1:8080";
 // const token = localStorage.getItem('token')
 // const user = localStorage.getItem('user')
 

@@ -1,13 +1,27 @@
 import { StackScreenProps } from "@react-navigation/stack";
-import React from "react";
-import { View, Button, Text, StyleSheet, ScrollView } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Button,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Modal,
+  TextInput
+} from "react-native";
 import { RootStackParamList } from "../../../../../App";
 import Table from "../../../components/table/Table";
 import { ViewModel } from "./ViewModel";
+import { Picker } from '@react-native-picker/picker';
+//import { PickerItem } from '@react-native-picker/picker';
 interface Props
-  extends StackScreenProps<RootStackParamList, "ProfileInfoScreen"> {}
+  extends StackScreenProps<RootStackParamList, "ProfileInfoScreen"> { }
 export const ProfileInfoScreen = ({ navigation, route }: Props) => {
   const { data } = ViewModel();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedValue, setSelectedValue] = useState("hardware");
+  const [observation, setObservation] = useState("");
+
   const Colums = [
     //   "idsol": ,
     // "fechacre": ,
@@ -59,7 +73,7 @@ export const ProfileInfoScreen = ({ navigation, route }: Props) => {
       <View style={Styles.buttonsContainer}>
         <Button
           onPress={() => {
-            navigation.navigate("HomeScreen");
+            setIsModalVisible(true);
           }}
           title="Crear Solicitud"
         />
@@ -82,6 +96,40 @@ export const ProfileInfoScreen = ({ navigation, route }: Props) => {
           </ScrollView>
         )}
       </View>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isModalVisible}
+        onRequestClose={() => {
+          setIsModalVisible(!isModalVisible);
+        }}
+      >
+        <View style={Styles.centeredView}>
+          <View style={Styles.modalView}>
+            <Text style={Styles.modalText}>Crear Solicitud</Text>
+            <Picker
+              selectedValue={selectedValue}
+              style={{ height: 50, width: 150 }}
+              onValueChange={(itemValue: string) => setSelectedValue(itemValue)}
+            >
+              <Picker.Item label="Hardware" value="hardware" />
+              <Picker.Item label="Software" value="software" />
+              <Picker.Item label="Conexión" value="conexion" />
+            </Picker>
+            <TextInput
+              style={Styles.input}
+              onChangeText={setObservation}
+              value={observation}
+              placeholder="Observación"
+            />
+            <Button
+              title="Guardar"
+              onPress={() => setIsModalVisible(!isModalVisible)}
+            />
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -90,5 +138,37 @@ const Styles = StyleSheet.create({
     flexDirection: "row",
     gap: 40,
     marginTop: 10,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    width: 200,
   },
 });
