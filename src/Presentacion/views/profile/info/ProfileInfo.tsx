@@ -17,19 +17,11 @@ import { Picker } from '@react-native-picker/picker';
 interface Props
   extends StackScreenProps<RootStackParamList, "ProfileInfoScreen"> { }
 export const ProfileInfoScreen = ({ navigation, route }: Props) => {
-  const { data } = ViewModel();
+  const { data, handleInputChange, obser, idcat, onSumit} = ViewModel();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [selectedValue, setSelectedValue] = useState("hardware");
-  const [observation, setObservation] = useState("");
-
+  
   const Colums = [
-    //   "idsol": ,
-    // "fechacre": ,
-    // "idcat": ,
-    // "prio": ,
-    // "idest": ,
-    // "tecnico": ,
-    // "fechaci":
+    
     {
       header: "N° Sol",
       accessorKey: "idsol",
@@ -109,23 +101,26 @@ export const ProfileInfoScreen = ({ navigation, route }: Props) => {
           <View style={Styles.modalView}>
             <Text style={Styles.modalText}>Crear Solicitud</Text>
             <Picker
-              selectedValue={selectedValue}
+              selectedValue={idcat}
               style={{ height: 50, width: 150 }}
-              onValueChange={(itemValue: string) => setSelectedValue(itemValue)}
+              onValueChange={(itemValue: number) => handleInputChange("idcat", itemValue)}
             >
-              <Picker.Item label="Hardware" value="hardware" />
-              <Picker.Item label="Software" value="software" />
-              <Picker.Item label="Conexión" value="conexion" />
+              <Picker.Item label="Hardware" value={2}/>
+              <Picker.Item label="Software" value= {1} />
+              <Picker.Item label="Conexión" value={3}/>
             </Picker>
             <TextInput
               style={Styles.input}
-              onChangeText={setObservation}
-              value={observation}
+              onChangeText= {value => handleInputChange("obser", value)}
+              value={obser}
               placeholder="Observación"
             />
             <Button
               title="Guardar"
-              onPress={() => setIsModalVisible(!isModalVisible)}
+              onPress={() => {
+                setIsModalVisible(!isModalVisible)
+                onSumit()
+              }}
             />
           </View>
         </View>
